@@ -8,12 +8,14 @@ def sqlite_download_version(d):
 
 PE = "3"
 SQLITE_PV = "${@sqlite_download_version(d)}"
-SRC_URI = "http://www.sqlite.org/2014/sqlite-autoconf-${SQLITE_PV}.tar.gz"
-
-SRC_URI[md5sum] = "33bb8db0038317ce1b0480ca1185c7ba"
-SRC_URI[sha256sum] = "86370f139405fdfe03334fd618171a74e50f589f17ccbe5933361ed1f58359ec"
+SRC_URI = "http://www.sqlite.org/2015/sqlite-autoconf-${SQLITE_PV}.tar.gz"
 
 S = "${WORKDIR}/sqlite-autoconf-${SQLITE_PV}"
+
+PARALLEL_MAKE = " "
+
+SRC_URI[md5sum] = "a18bfc015cd49a1e7a961b7b77bc3b37"
+SRC_URI[sha256sum] = "8382e55a4e7d853c93038562ca3dd00307937fccf1c6b65ddd813e503a56d626"
 
 # Provide column meta-data API
 BUILD_CFLAGS += "-DSQLITE_ENABLE_COLUMN_METADATA"
