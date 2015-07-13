@@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 LDFLAGS += "-lrt"
 
-DEPENDS = "glib-2.0 libusb usbutils pciutils glib-2.0-native gperf-native libxslt-native util-linux"
+DEPENDS = "glib-2.0 glib-2.0-native gperf-native libxslt-native util-linux"
+DEPENDS += " ${@base_contains('MACHINE_FEATURES', 'usbhost', 'libusb usbutils', '', d)}"
+DEPENDS += " ${@base_contains('MACHINE_FEATURES', 'pci', 'pciutils', '', d)}"
 RPROVIDES_${PN} = "hotplug"
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
@@ -37,16 +39,14 @@ RDEPENDS_${PN}-ptest += "make perl python"
 libexecdir = "${base_libdir}"
 EXTRA_OECONF = "--disable-introspection \
                 --with-rootlibdir=${base_libdir} \
-                --with-pci-ids-path=${datadir}/pci.ids \
-                ac_cv_file__usr_share_pci_ids=no \
-                ac_cv_file__usr_share_hwdata_pci_ids=no \
-                ac_cv_file__usr_share_misc_pci_ids=yes \
                 --sbindir=${base_sbindir} \
                 --libexecdir=${nonarch_base_libdir} \
                 --with-rootlibdir=${base_libdir} \
                 --with-rootprefix= \
                 --without-systemdsystemunitdir \
                "
+
+EXTRA_OECONF += " ${@base_contains('MACHINE_FEATURES', 'pci', '--with-pci-ids-path=${datadir}/pci.ids ac_cv_file__usr_share_pci_ids=no ac_cv_file__usr_share_hwdata_pci_ids=no ac_cv_file__usr_share_misc_pci_ids=yes', '--without-pci-ids-path', d)}"
 
 PACKAGES =+ "udev-cache"
 PACKAGES =+ "libudev"
