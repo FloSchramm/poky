@@ -63,7 +63,6 @@ SRC_URI += " \
 	file://fix_bad_rpath.patch \
 	file://perl-archlib-exp.patch \
 	file://dynaloaderhack.patch \
-	file://fix-FF_MORE-crash.patch \
 	\
         \
         file://config.sh \
@@ -84,8 +83,8 @@ SRC_URI_append_class-target = " \
             file://test/ext-DynaLoader-t-DynaLoader.t-fix-calling-dl_findfil.patch \
            "
 
-SRC_URI[md5sum] = "406ec049ebe3afcc80d9c76ec78ca4f8"
-SRC_URI[sha256sum] = "4e8c28ad6ecc89902f9cb2e76f2815bb1a8287ded278e15f7a36ca45f8bbcd02"
+SRC_URI[md5sum] = "81b17b9a4e5ee18e54efe906c9bf544d"
+SRC_URI[sha256sum] = "b1a43992a717d506095856d370550caa11dba8132a4fdaa186a1ae7e1fbd9b9d"
 
 inherit perlnative siteinfo
 

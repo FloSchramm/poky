@@ -1,11 +1,5 @@
-Upstream-Status:Inappropriate [embedded specific]
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- Makefile.SH | 130 ++++++++++++++++++++++++++++++------------------------------
- 1 file changed, 66 insertions(+), 64 deletions(-)
-
 diff --git a/Makefile.SH b/Makefile.SH
+index a2e6034..30248da 100755
 --- a/Makefile.SH
 +++ b/Makefile.SH
 @@ -39,10 +39,10 @@ case "$useshrplib" in
@@ -240,13 +234,11 @@ diff --git a/Makefile.SH b/Makefile.SH
  	$(MINIPERL) lib/unicore/mktables -C lib/unicore -P pod -maketest -makelist -p
  #	Commented out so always runs, mktables looks at far more files than we
  #	can in this makefile to decide if needs to run or not
-@@ -1005,22 +1015,22 @@ uni.data: $(MINIPERL_EXE) $(CONFIGPM) lib/unicore/mktables $(nonxs_ext)
- # $(PERL_EXE) and ext because pod_lib.pl needs Digest::MD5
+@@ -1006,21 +1016,21 @@ uni.data: $(MINIPERL_EXE) $(CONFIGPM) lib/unicore/mktables $(nonxs_ext)
  # But also this ensures that all extensions are built before we try to scan
  # them, which picks up Devel::PPPort's documentation.
--pod/perltoc.pod: $(perltoc_pod_prereqs)  $(PERL_EXE) $(ext) pod/buildtoc
+ pod/perltoc.pod: $(perltoc_pod_prereqs)  $(PERL_EXE) $(ext) pod/buildtoc
 -	$(RUN_PERL) -f pod/buildtoc -q
-+pod/perltoc.pod: $(perltoc_pod_prereqs) $(ext) pod/buildtoc
 +	$(MINIPERL) -f pod/buildtoc -q
  
  pod/perlapi.pod: pod/perlintern.pod
@@ -259,9 +251,9 @@ diff --git a/Makefile.SH b/Makefile.SH
 +pod/perlmodlib.pod: pod/perlmodlib.PL MANIFEST
  	$(MINIPERL) pod/perlmodlib.PL -q
  
- pod/perl5200delta.pod: pod/perldelta.pod
- 	$(RMS) pod/perl5200delta.pod
- 	$(LNS) perldelta.pod pod/perl5200delta.pod
+ pod/perl5202delta.pod: pod/perldelta.pod
+ 	$(RMS) pod/perl5202delta.pod
+ 	$(LNS) perldelta.pod pod/perl5202delta.pod
  
 -extra.pods: $(MINIPERL_EXE)
 +extra.pods:
@@ -333,7 +325,7 @@ diff --git a/Makefile.SH b/Makefile.SH
  	\$(dynamic_ext) \$(TEST_PERL_DLL) runtests x2p/s2p x2p/find2perl \
  	\$(generated_pods)
  	$to libperl.*
-@@ -1469,7 +1471,7 @@ test_prep test-prep: test_prep_pre \$(MINIPERL_EXE) \$(unidatafiles) \$(PERL_EXE
+@@ -1474,7 +1476,7 @@ test_prep test-prep: test_prep_pre \$(MINIPERL_EXE) \$(unidatafiles) \$(PERL_EXE
  esac
  
  $spitshell >>$Makefile <<'!NO!SUBS!'
@@ -342,7 +334,7 @@ diff --git a/Makefile.SH b/Makefile.SH
  	$(MINIPERL) make_ext.pl $(dynamic_ext_re) MAKE=$(MAKE) LIBPERL_A=$(LIBPERL) LINKTYPE=dynamic
  	cd t && (rm -f $(PERL_EXE); $(LNS) ../$(PERL_EXE) $(PERL_EXE))
  !NO!SUBS!
-@@ -1520,7 +1522,7 @@ $spitshell >>$Makefile <<'!NO!SUBS!'
+@@ -1525,7 +1527,7 @@ $spitshell >>$Makefile <<'!NO!SUBS!'
  
  # Can't depend on lib/Config.pm because that might be where miniperl
  # is crashing.
@@ -351,6 +343,3 @@ diff --git a/Makefile.SH b/Makefile.SH
  	-@test -f lib/Config.pm || $(MAKE) lib/Config.pm $(unidatafiles)
  	@echo " "
  	@echo "You may see some irrelevant test failures if you have been unable"
--- 
-1.8.1.2
-
